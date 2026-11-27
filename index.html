@@ -591,6 +591,49 @@
 <span class="">Submit Consultation Request</span>
 </button>
 </form>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('#appointment-section form');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById('patient-name').value.trim();
+    const phone = document.getElementById('patient-phone').value.trim();
+    const date = document.getElementById('preferred-date').value;
+    const slot = document.getElementById('preferred-time').value;
+    const reason = document.getElementById('visit-reason').value;
+    const consent = document.getElementById('privacy-consent').checked;
+
+    if (!consent) {
+      alert('Please provide consent before submitting your appointment request.');
+      return;
+    }
+
+    const message =
+      'Hello Dr. Geetha Clinic,\n\n' +
+      'I would like to request an appointment.\n\n' +
+      'Patient Name: ' + name + '\n' +
+      'Phone Number: ' + phone + '\n' +
+      'Preferred Date: ' + date + '\n' +
+      'Preferred Slot: ' + slot + '\n' +
+      'Appointment Category: ' + reason + '\n\n' +
+      'Please contact me to confirm the appointment.';
+
+    const whatsappURL =
+      'https://wa.me/918075631422?text=' +
+      encodeURIComponent(message);
+
+    const whatsappWindow = window.open(whatsappURL, '_blank');
+
+    if (!whatsappWindow) {
+      window.location.href = whatsappURL;
+    }
+  });
+});
+</script>
 </div>
 </div>
 </div>
